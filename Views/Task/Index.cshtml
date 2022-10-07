@@ -1,0 +1,47 @@
+@model IEnumerable<MyTask>
+
+@{
+    ViewData["Title"] = "Tasks Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Tasks</h1>
+    <form asp-action="Create" asp-controller="Task">
+      <input type="text" name="description" />
+
+      <button type="submit" class="btn btn-primary">Create New Task</button>
+    </form>
+</div>
+
+<div>
+  <table class="table" id="tblTasks">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusTask)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusTask)
+                </td>
+                <td>
+                  <a asp-action="Edit" asp-controller="Task" asp-route-id="@item.Id">Edit</a> |
+                  <a asp-action="Delete" asp-controller="Task" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
